@@ -29,7 +29,7 @@ Funcionalidades Atuais
 
 - Geração de tickets
 - Registro de entrada de veículos
-- Validação de tickets
+- Validação de tickets 
 - Controle de saída
 - Persistência de dados em SQLite
 - Listagem de registros
