@@ -18,7 +18,7 @@ O projeto foi criado utilizando Python e SQLite, permitindo o registro e control
 
 ---
 
-Tecnologias Utilizadas
+Tecnologia Utilizadas
 
 - Python
 - SQLite
