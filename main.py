@@ -1,5 +1,3 @@
-analise esse codigo e diga o que posso mudar e o que preciso melhorar categorizando em questões de urgencia lembrando que estou esportando ele do google colabs para o vs code e as bibliotecas que tem no colabs não tem no vs code ou seja sera necessario reescrever ele
-
 import sqlite3
 from datetime import datetime
 import uuid
