@@ -2,6 +2,7 @@ import sqlite3
 from datetime import datetime
 import uuid
 
+
 # ======================
 # BANCO DE DADOS
 # ======================
@@ -22,6 +23,7 @@ CREATE TABLE IF NOT EXISTS tickets (
 
 conn.commit()
 
+
 # ======================
 # GERAR TICKET
 # ======================
@@ -32,16 +34,50 @@ def gerar_ticket():
     print("ABC1234")
     print("BRA2E19\n")
 
-    placa = input("Digite a placa do carro: ").upper()
+    placa = input("Digite a placa do carro: ").strip().upper()
+
+    # Verifica se a placa já possui ticket ativo
+    cursor.execute("""
+        SELECT codigo
+        FROM tickets
+        WHERE placa = ?
+        AND saida IS NULL
+    """, (placa,))
+
+    ticket_ativo = cursor.fetchone()
+
+    if ticket_ativo:
+
+        print("\n======================")
+        print("TICKET JÁ EXISTE")
+        print("======================")
+        print("Placa :", placa)
+        print("Código:", ticket_ativo[0])
+        print("Veículo já está estacionado.")
+        print("======================\n")
+
+        return
 
     codigo = str(uuid.uuid4())[:8].upper()
 
     entrada = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-    cursor.execute(
-        "INSERT INTO tickets VALUES (NULL, ?, ?, ?, ?, ?)",
-        (codigo, placa, entrada, 0, None)
-    )
+    cursor.execute("""
+        INSERT INTO tickets (
+            codigo,
+            placa,
+            entrada,
+            validado,
+            saida
+        )
+        VALUES (?, ?, ?, ?, ?)
+    """, (
+        codigo,
+        placa,
+        entrada,
+        0,
+        None
+    ))
 
     conn.commit()
 
@@ -60,29 +96,33 @@ def gerar_ticket():
 
 def validar_ticket():
 
-    codigo = input("Digite o código do ticket: ").upper()
+    codigo = input("Digite o código do ticket: ").strip().upper()
 
-    cursor.execute(
-        "SELECT * FROM tickets WHERE codigo = ?",
-        (codigo,)
-    )
+    cursor.execute("""
+        SELECT validado
+        FROM tickets
+        WHERE codigo = ?
+    """, (codigo,))
 
     ticket = cursor.fetchone()
 
-    if ticket:
-
-        cursor.execute(
-            "UPDATE tickets SET validado = 1 WHERE codigo = ?",
-            (codigo,)
-        )
-
-        conn.commit()
-
-        print("\nTicket validado!\n")
-
-    else:
-
+    if not ticket:
         print("\nTicket não encontrado!\n")
+        return
+
+    if ticket[0] == 1:
+        print("\nTicket já validado!\n")
+        return
+
+    cursor.execute("""
+        UPDATE tickets
+        SET validado = 1
+        WHERE codigo = ?
+    """, (codigo,))
+
+    conn.commit()
+
+    print("\nTicket validado!\n")
 
 
 # ======================
@@ -91,21 +131,26 @@ def validar_ticket():
 
 def liberar_saida():
 
-    codigo = input("Digite o código do ticket: ").upper()
+    codigo = input("Digite o código do ticket: ").strip().upper()
 
-    cursor.execute(
-        "SELECT placa, entrada, validado FROM tickets WHERE codigo = ?",
-        (codigo,)
-    )
+    cursor.execute("""
+        SELECT placa, entrada, validado, saida
+        FROM tickets
+        WHERE codigo = ?
+    """, (codigo,))
 
     ticket = cursor.fetchone()
 
     if not ticket:
-
         print("\nTicket não encontrado!\n")
         return
 
-    placa, entrada, validado = ticket
+    placa, entrada, validado, saida = ticket
+
+    # Já saiu
+    if saida is not None:
+        print("\nVeículo já deixou o estacionamento.\n")
+        return
 
     entrada_data = datetime.strptime(
         entrada,
@@ -118,7 +163,6 @@ def liberar_saida():
         agora - entrada_data
     ).total_seconds() / 60
 
-    # REGRA
 
     if minutos <= 20:
 
@@ -135,16 +179,21 @@ def liberar_saida():
         liberado = False
         motivo = "Necessário pagamento"
 
-    # RESULTADO
 
     if liberado:
 
-        saida = agora.strftime("%d/%m/%Y %H:%M:%S")
-
-        cursor.execute(
-            "UPDATE tickets SET saida = ? WHERE codigo = ?",
-            (saida, codigo)
+        horario_saida = agora.strftime(
+            "%d/%m/%Y %H:%M:%S"
         )
+
+        cursor.execute("""
+            UPDATE tickets
+            SET saida = ?
+            WHERE codigo = ?
+        """, (
+            horario_saida,
+            codigo
+        ))
 
         conn.commit()
 
@@ -153,6 +202,7 @@ def liberar_saida():
         print("======================")
         print("Placa :", placa)
         print("Motivo:", motivo)
+        print("Saída :", horario_saida)
         print("======================\n")
 
     else:
@@ -172,8 +222,13 @@ def liberar_saida():
 def listar_tickets():
 
     cursor.execute("""
-    SELECT codigo, placa, entrada, validado, saida
-    FROM tickets
+        SELECT codigo,
+               placa,
+               entrada,
+               validado,
+               saida
+        FROM tickets
+        ORDER BY id DESC
     """)
 
     tickets = cursor.fetchall()
@@ -182,30 +237,46 @@ def listar_tickets():
     print("TICKETS")
     print("======================")
 
+    if not tickets:
+        print("Nenhum ticket encontrado.")
+        return
+
     for ticket in tickets:
 
         codigo, placa, entrada, validado, saida = ticket
 
-        status = "VALIDADO" if validado else "PENDENTE"
+
+        if saida:
+            status = "FINALIZADO"
+
+        elif validado:
+            status = "VALIDADO"
+
+        else:
+            status = "PENDENTE"
+
+
+        saida_exibir = saida if saida else "-"
+
 
         print(f"""
 Código : {codigo}
 Placa  : {placa}
 Entrada: {entrada}
 Status : {status}
-Saída  : {saida}
+Saída  : {saida_exibir}
 ----------------------
 """)
 
 
 # ======================
-# INICIAR SISTEMA
+# SISTEMA
 # ======================
 
 print("""
 ==================================
       PARK CONTROL SYSTEM
- Sistema de Estacionamento
+         Versão 1.1
 ==================================
 
 Sistema iniciado com sucesso!
@@ -213,8 +284,14 @@ Sistema iniciado com sucesso!
 Exemplos de placas:
 ABC1234
 BRA2E19
+
+Novidade da versão 1.1:
+✔ Uma placa não pode possuir
+  dois tickets ativos.
+
 ==================================
 """)
+
 
 # ======================
 # MENU
@@ -230,7 +307,7 @@ while True:
 0 - Sair
 """)
 
-    opcao = input("Escolha: ")
+    opcao = input("Escolha: ").strip()
 
     if opcao == "1":
 
@@ -251,10 +328,11 @@ while True:
     elif opcao == "0":
 
         print("\nSistema encerrado!")
+
+        conn.close()
+
         break
 
     else:
 
         print("\nOpção inválida!\n")
-
-conn.close()
