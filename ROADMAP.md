@@ -254,7 +254,7 @@ Melhor acompanhamento da operação em tempo real.
 
 ### Versão 1.3
 
-Status: Planejada
+Status: Em planejamento
 
 Objetivo:
 
@@ -305,7 +305,7 @@ Melhor escalabilidade do projeto.
 
 ### Versão 1.4
 
-Status: Planejada
+Status: Em planejamento
 
 Objetivo:
 
@@ -368,7 +368,7 @@ Preparação para uso comercial.
 
 ### Versão 1.5
 
-Status: Planejada
+Status: Em planejamento
 
 Objetivo:
 
@@ -419,7 +419,7 @@ Planejado.
 
 ### Versão 1.6
 
-Status: Planejada
+Status: Em planejamento
 
 Objetivo:
 
@@ -470,7 +470,7 @@ Planejado.
 
 ### Versão 1.7
 
-Status: Planejada
+Status: Em planejamento
 
 Objetivo:
 
@@ -505,7 +505,7 @@ Relatório de faturamento.
 
 ### Versão 1.8
 
-Status: Planejada
+Status: Em planejamento
 
 Objetivo:
 
@@ -532,7 +532,7 @@ Cobertura de código.
 
 ### Versão 2.0
 
-Status: Planejada
+Status: Em planejamento
 
 Objetivo:
 
@@ -561,7 +561,7 @@ Escalabilidade.
 
 ### Versão 2.5
 
-Status: Planejada
+Status: Em planejamento
 
 Objetivo:
 
@@ -588,7 +588,7 @@ Dashboard API.
 
 ### Versão 3.0
 
-Status: Planejamento Inicial
+Status: Em fase de estudo 
 
 Objetivo:
 
@@ -625,7 +625,7 @@ Maior organização operacional.
 
 ### Versão 4.0
 
-Status: Planejamento Conceitual
+Status: Em fase de estudo
 
 Objetivo:
 
@@ -665,7 +665,7 @@ EasyOCR.
 
 ### Versão 5.0
 
-Status: Pesquisa e Desenvolvimento
+Status: Em fase de estudo
 
 Objetivo:
 
