@@ -5,6 +5,8 @@ Arquivo de Controle de Alterações
 
 Classificação: NAG - Registro de Evolução do Sistema
 
+---
+
 ### Versão 1.1
 
 Data de Liberação: 18/06/2026
@@ -27,6 +29,8 @@ Status:
 
 Resolvido.
 
+---
+
 ### PC-002
 
 Descrição:
@@ -40,6 +44,8 @@ Ajustado o processo de exibição para garantir a apresentação correta das inf
 Status:
 
 Resolvido.
+
+---
 
 ### PC-003
 
@@ -55,12 +61,16 @@ Status:
 
 Resolvido.
 
+---
+
 ### Resultado da Versão
 
 Maior estabilidade do sistema.
 Melhor controle das regras de negócio.
 Redução de inconsistências operacionais.
 Aprimoramento da confiabilidade dos registros.
+
+---
 
 ### Versão 1.0
 
