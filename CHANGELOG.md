@@ -92,9 +92,13 @@ Implementado e em fase de teste.
 ### Resultado da Versão
 
 -Maior confiabilidade operacional.
+
 -Melhoria da validação de dados.
+
 -Facilidade na localização de registros.
+
 -Aprimoramento das regras de negócio.
+
 -Expansão das funcionalidades de consulta.
 
 ---
