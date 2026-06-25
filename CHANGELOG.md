@@ -161,10 +161,13 @@ Resolvido.
 
 ### Resultado da Versão
 
-Maior estabilidade do sistema.
-Melhor controle das regras de negócio.
-Redução de inconsistências operacionais.
-Aprimoramento da confiabilidade dos registros.
+-Maior estabilidade do sistema.
+
+-Melhor controle das regras de negócio.
+
+-Redução de inconsistências operacionais.
+
+-Aprimoramento da confiabilidade dos registros.
 
 ---
 
