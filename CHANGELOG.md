@@ -11,7 +11,7 @@ Classificação: NAG - Registro de Evolução do Sistema
 
 Data de Liberação: A definir.
 
-Status: em fase de teste.
+Status: Em fase de teste.
 
 Correções Realizadas
 
