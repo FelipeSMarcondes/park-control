@@ -7,6 +7,98 @@ Classificação: NAG - Registro de Evolução do Sistema
 
 ---
 
+### Versão 1.2
+
+Data de Liberação: A definir.
+
+Status: em fase de teste.
+
+Correções Realizadas
+
+### PC-004
+
+Descrição:
+
+Ticket finalizado ainda podia ser validado após o encerramento.
+
+Ação Corretiva:
+
+Implementada validação para impedir a validação de tickets com status finalizado.
+
+Status:
+
+Resolvido.
+
+---
+
+### PC-005
+
+Descrição:
+
+Ausência de validação do formato de placas durante o cadastro.
+
+Ação Corretiva:
+
+Implementação de validação para placas no padrão antigo e Mercosul.
+
+Status:
+
+Resolvido.
+
+---
+
+### PC-010
+
+Descrição:
+
+Identificado que ao realizar consultas por código o sistema encerrava após a execução da função.
+
+Ação Corretiva:
+
+Corrigido a estrutura do menu principal e reposicionamento do fluxo de encerramento do sistema.
+
+Status:
+
+Resolvido.
+
+---
+
+### Novas Funcionalidades 
+
+### PQ-001
+
+Descrição:
+
+Implementação da consulta de tickets por placa.
+
+Status:
+
+Implementado e em fase de teste.
+
+--- 
+
+### PQ-002
+
+Descrição:
+
+Implementação da consulta de tickets por código.
+
+Status:
+
+Implementado e em fase de teste.
+
+---
+
+### Resultado da Versão
+
+-Maior confiabilidade operacional.
+-Melhoria da validação de dados.
+-Facilidade na localização de registros.
+-Aprimoramento das regras de negócio.
+-Expansão das funcionalidades de consulta.
+
+---
+
 ### Versão 1.1
 
 Data de Liberação: 18/06/2026
