@@ -6,7 +6,7 @@ Classificação: Sistema de Gerenciamento de Estacionamento
 
 Status: Em Desenvolvimento
 
-Versão Atual: 1.1
+Versão Atual: 1.2
 
 ---
 
